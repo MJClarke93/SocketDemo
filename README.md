@@ -1,6 +1,6 @@
 # Socket.IO Demo
 
-This is a small demo created for Socket.IO (website: https://socket.io/), a JavaScript library which enables real-time, two way communication between clients and servers. The demo was created as part of Assignment 2 for Advanced Internet Programming 2018 at the University of Technology, Sydney. A walk-through of the demo is provided in the following YouTube video: [to be added]
+This is a small demo created for Socket.IO (website: https://socket.io/), a JavaScript library which enables real-time, two way communication between clients and servers. The demo was created as part of Assignment 2 for Advanced Internet Programming 2018 at the University of Technology, Sydney. A walkthrough of the demo is provided in the following YouTube video: https://youtu.be/PT2vd-eaefQ
 
 *Author: Mitchell Clarke*
 
@@ -26,7 +26,7 @@ This is a small demo created for Socket.IO (website: https://socket.io/), a Java
 
 ## Usage
 
-Three files provided: **server.js**, **demo.html** and **colour.html**
+Three demo files are provided: **server.js**, **demo.html** and **colour.html**
 
 * Server.js is an Express/Socket.IO server which acts as a back-end to the two HTML web-pages. The code which starts the server, manages sockets, responds to client messages and passes client messages between each other can be found here. It listens at http://localhost:4000.
 * Demo.html is an HTML page which connects to the back-end server via Socket.IO. Clicking 'Send to Server' will cause the message entered in the input box to appear in the server's console, provided the server is running. Clicking 'Broadcast' will send the message to all other clients connected to /demo.
