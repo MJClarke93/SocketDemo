@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Socket IO Demo</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+		  // Open Socket.IO connection
+		  var socket = io();
+		  
+		  // When the client recieves a message, show it
+		  socket.on('server_msg', function (data) {
+			document.getElementById('ser_msg').innerHTML = data.msg;
+		  });
+		  
+		  // Sends a message to the server
+		  function msgSend() {
+			payload = {'msg' : document.getElementById('cli_msg').value};
+			socket.emit('client_msg', payload);
+		  }
+		  
+		  // Sends a broadcast to the server, to be forwarded to other clients
+		  function msgBroadcast() {
+			payload = {'msg' : document.getElementById('cli_msg').value};
+			socket.emit('client_broadcast', payload);
+		  }
+		</script>
+	</head>
+	<body>
+		<div id="ser_msg_box">
+			<p id="ser_msg"></br></p>
+		</div>
+		<div id="button_box">
+			<input type='text' id="cli_msg"/></br>
+			<button type="button" onclick="msgSend()">Send to Server</button></br>
+			<button type="button" onclick="msgBroadcast()">Broadcast</button></br>
+		</div>
+	</body>
+</html>

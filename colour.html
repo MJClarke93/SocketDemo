@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Socket IO Colours</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+		  // Open Socket.IO connection
+		  var socket = io('/colour');
+		  var team = '';
+		  
+		  // When the client recieves a message from another client, display it
+		  socket.on('colour_msg', function (data) {
+		    document.getElementById('colour_msg').innerHTML = data.msg;
+		  });
+		  
+		  // When the client recieves a server message, display it
+		  socket.on('server_msg', function (data) {
+			document.getElementById('ser_msg').innerHTML = data.msg;
+		  });
+		  
+		  // Sends a message to the server, to be forwarded to clients of the same colour
+		  function msgSend() {
+			// Only send the message if the client has a colour
+			if (!team) {
+				document.getElementById('colour_msg').innerHTML = "Join a coloured room to send a message!";
+				return
+				}
+			payload = {'msg' : document.getElementById('cli_msg').value};
+			socket.emit('client_msg', payload);
+		  }
+		  
+		  // Requests to join the blue room
+		  function joinBlue() {
+			team = 'Blue';
+			document.body.style.backgroundColor = '#BBBBFF';
+			document.getElementById('colour_msg').innerHTML = '</br>';
+			document.getElementById('ser_msg').innerHTML = '</br>';
+			socket.emit('blue')
+		  }
+		  
+		  // Requests to join the red room
+		  function joinRed() {
+			team = 'Red';
+			document.body.style.backgroundColor = '#FFBBBB';
+			document.getElementById('colour_msg').innerHTML = '</br>';
+			document.getElementById('ser_msg').innerHTML = '</br>';
+			socket.emit('red')
+		  }
+		</script>
+	</head>
+	<body>
+		<div id="ser_msg_box">
+			<p id="colour_msg"></br></p>
+			<p id="ser_msg"></br></p>
+		</div>
+		<div id="button_box">
+			<input type='text' id="cli_msg"/></br>
+			<button type="button" onclick="msgSend()">Send</button></br></br>
+			<button type="button" onclick="joinBlue()">Join Blue</button>
+			<button type="button" onclick="joinRed()">Join Red</button>
+		</div>
+	</body>
+</html>
